@@ -35,6 +35,13 @@ export function HeroSection() {
     }
   };
 
+  const handleScrollToPackages = () => {
+    const packagesSection = document.getElementById('packages');
+    if (packagesSection) {
+      packagesSection.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
   return (
     <section className="relative min-h-screen flex flex-col items-center justify-center overflow-hidden bg-gradient-hero pt-20 pb-32">
       {/* Background effects */}
@@ -172,6 +179,7 @@ export function HeroSection() {
       </div>
 
       {/* Scroll indicator */}
+      
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
@@ -180,6 +188,7 @@ export function HeroSection() {
       >
         <span className="text-[11px] text-neutral-400 font-medium">Scroll untuk melihat lebih</span>
         <motion.div
+          initial={{ y: 0 }}
           animate={{ y: [0, 6, 0] }}
           transition={{ duration: 1.5, repeat: Infinity }}
           className="w-5 h-8 rounded-full border-2 border-neutral-300 flex items-start justify-center pt-1.5 pointer-events-none"

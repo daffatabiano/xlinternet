@@ -1,0 +1,58 @@
+import { MetadataRoute } from "next";
+import { getCoverageAreasForSitemap } from "@/lib/seo-utils";
+
+// Revalidate setiap 1 jam
+export const revalidate = 3600;
+
+/**
+ * Sitemap untuk Coverage Areas (Dynamic Location Pages)
+ * Endpoint: /api/sitemap-coverage
+ * Dibatasi max 50,000 URLs per sitemap
+ */
+export async function GET(): Promise<Response> {
+  try {
+    const coverageAreas = await getCoverageAreasForSitemap();
+
+    const xml = generateSitemapXml(coverageAreas);
+
+    return new Response(xml, {
+      status: 200,
+      headers: {
+        "Content-Type": "application/xml; charset=utf-8",
+        "Cache-Control": "public, s-maxage=3600, stale-while-revalidate=86400",
+      },
+    });
+  } catch (error) {
+    console.error("Error generating coverage sitemap:", error);
+    return new Response("Error generating sitemap", { status: 500 });
+  }
+}
+
+function generateSitemapXml(entries: any[]): string {
+  const xml =
+    '<?xml version="1.0" encoding="UTF-8"?>\n' +
+    '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n' +
+    entries
+      .map(
+        (entry) =>
+          `  <url>
+    <loc>${escapeXml(entry.url)}</loc>
+    ${entry.lastModified ? `<lastmod>${entry.lastModified.toISOString().split("T")[0]}</lastmod>` : ""}
+    ${entry.changeFrequency ? `<changefreq>${entry.changeFrequency}</changefreq>` : ""}
+    ${entry.priority ? `<priority>${entry.priority}</priority>` : ""}
+  </url>`
+      )
+      .join("\n") +
+    "\n</urlset>";
+
+  return xml;
+}
+
+function escapeXml(str: string): string {
+  return str
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&apos;");
+}
