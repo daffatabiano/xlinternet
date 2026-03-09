@@ -12,7 +12,6 @@ import { cn } from '@/lib/utils';
 import { authService } from '@/lib/api/services';
 import toast from 'react-hot-toast';
 import Image from 'next/image';
-import Logo from '@/public/logo.svg';
 
 const navItems = [
   { href: '/admin',           label: 'Dashboard',  icon: LayoutDashboard, exact: true },
@@ -49,7 +48,7 @@ export function AdminLayout({ children }: { children: React.ReactNode }) {
       <aside className="hidden lg:flex flex-col w-64 bg-neutral-900 fixed inset-y-0 left-0 z-30">
         {/* Logo */}
         <div className="flex items-center gap-2.5 px-6 h-16 border-b border-white/8">
-          <Image src={Logo} alt="XLNet Logo" width={32} height={32} className="w-8 h-8" />
+          <Image src='/logo.svg' alt="XLNet Logo" width={32} height={32} className="w-8 h-8" />
           {/* <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-brand-blue to-brand-violet flex items-center justify-center">
             <Wifi className="w-4 h-4 text-white" />
           </div> */}
@@ -119,7 +118,7 @@ export function AdminLayout({ children }: { children: React.ReactNode }) {
             {/* Logo + close */}
             <div className="flex items-center justify-between px-4 h-16 border-b border-white/8">
               <div className="flex items-center gap-2.5">
-                <Image src={Logo} alt="XLNet Logo" width={32} height={32} className="w-8 h-8" />
+                <Image src='/logo.svg' alt="XLNet Logo" width={32} height={32} className="w-8 h-8" />
                 <div>
                   <span className="font-display font-black text-white text-base">XLNet</span>
                   <span className="block text-[10px] text-white/30 font-medium -mt-0.5">Admin Panel</span>

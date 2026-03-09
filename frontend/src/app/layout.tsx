@@ -61,8 +61,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="id" className={`${sora.variable} ${plusJakarta.variable}`} suppressHydrationWarning>
       <head>
-        <link rel="icon" href="/favicon.ico" />
-        <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+        <link rel="icon" href="/favicon.svg" />
+        <link rel="apple-touch-icon" href="/apple-touch-icon.pngsvg" />
         <meta name="theme-color" content="#0057B8" />
         <script
           type="application/ld+json"
