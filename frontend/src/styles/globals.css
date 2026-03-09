@@ -1,0 +1,159 @@
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400&family=Sora:wght@300;400;500;600;700;800&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ─── CSS VARIABLES ──────────────────────────────────────────────────────── */
+:root {
+  --font-display: 'Sora', sans-serif;
+  --font-body:    'Plus Jakarta Sans', sans-serif;
+
+  /* XL Brand Colors */
+  --xl-blue:       #0057B8;
+  --xl-blue-light: #1A73E8;
+  --xl-blue-dark:  #003D82;
+  --xl-cyan:       #00B4D8;
+  --xl-violet:     #6D28D9;
+  --xl-green:      #10B981;
+  --xl-amber:      #F59E0B;
+
+  /* Backgrounds */
+  --bg:        #F0F4FF;
+  --bg-dark:   #0A0F1E;
+  --surface:   #FFFFFF;
+  --surface-dim: #F7F9FF;
+}
+
+/* ─── BASE ───────────────────────────────────────────────────────────────── */
+* { box-sizing: border-box; }
+
+html {
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  font-family: var(--font-body);
+  background: var(--bg);
+  color: #0D1426;
+  overflow-x: hidden;
+  line-height: 1.6;
+}
+
+/* ─── TYPOGRAPHY ─────────────────────────────────────────────────────────── */
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-display);
+  font-weight: 700;
+  line-height: 1.15;
+  letter-spacing: -0.01em;
+}
+
+/* ─── SCROLLBAR ──────────────────────────────────────────────────────────── */
+::-webkit-scrollbar { width: 6px; height: 6px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: #B8C8ED; border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: #8097CC; }
+
+/* ─── SELECTION ──────────────────────────────────────────────────────────── */
+::selection { background: rgba(0,87,184,0.15); color: var(--xl-blue-dark); }
+
+/* ─── FOCUS OUTLINE ──────────────────────────────────────────────────────── */
+:focus-visible { outline: 2px solid var(--xl-blue); outline-offset: 2px; border-radius: 4px; }
+
+/* ─── COMPONENTS ─────────────────────────────────────────────────────────── */
+@layer components {
+  /* Section */
+  .section { 
+    @apply py-16 md:py-20 lg:py-28;
+  }
+  .section--alt { @apply bg-white; }
+  .container-page { @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8; }
+
+  /* Gradient text */
+  .gradient-text {
+    @apply bg-gradient-to-r from-brand-blue to-brand-violet bg-clip-text text-transparent;
+  }
+
+  /* Glass card */
+  .glass-card {
+    background: rgba(255,255,255,0.7);
+    backdrop-filter: blur(16px) saturate(180%);
+    -webkit-backdrop-filter: blur(16px) saturate(180%);
+    border: 1px solid rgba(255,255,255,0.85);
+  }
+
+  /* Glass dark */
+  .glass-dark {
+    background: rgba(255,255,255,0.06);
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(255,255,255,0.1);
+  }
+
+  /* Dot grid bg */
+  .dot-grid {
+    background-image: radial-gradient(circle, rgba(0,87,184,0.12) 1px, transparent 1px);
+    background-size: 36px 36px;
+    mask-image: radial-gradient(ellipse 80% 80% at 50% 50%, black 30%, transparent 100%);
+  }
+
+  /* Skeleton loader */
+  .skeleton {
+    @apply rounded-xl bg-neutral-200 animate-pulse;
+    background: linear-gradient(90deg, #e2e8f0 25%, #f1f5f9 50%, #e2e8f0 75%);
+    background-size: 200% 100%;
+    animation: shimmer 1.5s linear infinite;
+  }
+
+  /* Badge */
+  .badge {
+    @apply inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold tracking-wide;
+  }
+  .badge-blue   { @apply bg-blue-50   text-brand-blue   border border-blue-200; }
+  .badge-green  { @apply bg-green-50  text-brand-green  border border-green-200; }
+  .badge-amber  { @apply bg-amber-50  text-amber-700    border border-amber-200; }
+  .badge-violet { @apply bg-violet-50 text-brand-violet border border-violet-200; }
+  .badge-gray   { @apply bg-gray-100  text-gray-600     border border-gray-200; }
+
+  /* Card hover lift */
+  .card-hover {
+    @apply transition-all duration-300 ease-out;
+  }
+  .card-hover:hover {
+    @apply -translate-y-1 shadow-card-lg;
+  }
+
+  /* Admin sidebar link */
+  .sidebar-link {
+    @apply flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium
+           text-neutral-400 hover:text-white hover:bg-white/10
+           transition-all duration-150;
+  }
+  .sidebar-link.active {
+    @apply text-white bg-brand-blue/80 shadow-brand;
+  }
+
+  /* Settings form label */
+  .settings-label {
+    @apply block text-sm font-semibold text-neutral-700 mb-1.5;
+  }
+}
+
+/* ─── UTILITY ────────────────────────────────────────────────────────────── */
+@layer utilities {
+  .text-balance { text-wrap: balance; }
+  .no-scrollbar::-webkit-scrollbar { display: none; }
+  .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+  .animate-delay-100 { animation-delay: 100ms; }
+  .animate-delay-200 { animation-delay: 200ms; }
+  .animate-delay-300 { animation-delay: 300ms; }
+  .animate-delay-400 { animation-delay: 400ms; }
+  .animate-delay-500 { animation-delay: 500ms; }
+}
+
+/* ─── FRAMER MOTION HELPERS ──────────────────────────────────────────────── */
+.motion-safe { will-change: transform, opacity; }
+
+/* ─── PROSE (Blog content) ───────────────────────────────────────────────── */
+/* Prose styles can be added later with @tailwindcss/typography plugin */
